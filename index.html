@@ -10,14 +10,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="NRG DNS">
-<meta name="description" content="Install a secure DNS over HTTPS profile on your iPhone or iPad with NRG DNS.">
+<meta name="description" content="Install the NRG DNS profile (NextDNS 81d731) on your iPhone or iPad.">
 
 <title>NRG DNS — Secure DNS for iOS</title>
 
 <style>
 
 /* =====================================
-   NRG DNS — iOS DNS PROFILE INSTALLER
+   NRG DNS — SINGLE PROFILE INSTALLER
 ===================================== */
 
 * {
@@ -94,7 +94,7 @@ body::before {
     z-index: 1;
 
     width: 100%;
-    max-width: 1040px;
+    max-width: 780px;
     margin: 0 auto;
 }
 
@@ -175,16 +175,6 @@ h1 {
 }
 
 /* =====================================
-   GRID
-===================================== */
-
-.content-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-}
-
-/* =====================================
    CARDS
 ===================================== */
 
@@ -198,132 +188,13 @@ h1 {
     padding: clamp(17px, 2.5vw, 24px);
 
     box-shadow: var(--shadow);
+    margin-bottom: 16px;
 }
 
 .card-title {
     font-size: clamp(16px, 2vw, 19px);
     font-weight: 750;
     margin-bottom: 14px;
-}
-
-/* =====================================
-   SERVER PICKER
-===================================== */
-
-.server-list {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-}
-
-.server-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    width: 100%;
-
-    text-align: left;
-    font-family: inherit;
-    color: inherit;
-
-    background: transparent;
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-
-    padding: 12px 14px;
-
-    cursor: pointer;
-    transition: .18s;
-}
-
-.server-item.active {
-    border-color: var(--blue);
-    background: var(--blue-soft);
-}
-
-.radio {
-    flex: 0 0 auto;
-
-    width: 20px;
-    height: 20px;
-
-    border-radius: 50%;
-    border: 2px solid var(--border);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: .18s;
-}
-
-.server-item.active .radio {
-    border-color: var(--blue);
-}
-
-.server-item.active .radio::after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--blue);
-}
-
-.server-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-}
-
-.server-name {
-    font-size: clamp(14px, 1.7vw, 15px);
-    font-weight: 650;
-}
-
-.server-desc {
-    font-size: clamp(11px, 1.3vw, 12.5px);
-    color: var(--secondary);
-    overflow-wrap: anywhere;
-}
-
-/* =====================================
-   CUSTOM INPUT
-===================================== */
-
-.custom-wrap {
-    margin-top: 12px;
-    display: none;
-}
-
-.custom-wrap.show {
-    display: block;
-}
-
-.custom-input {
-    width: 100%;
-
-    font-family: inherit;
-    font-size: 14px;
-    color: var(--text);
-
-    background: transparent;
-    border: 1.5px solid var(--border);
-    border-radius: 13px;
-
-    padding: 13px 14px;
-
-    outline: none;
-    transition: .18s;
-}
-
-.custom-input::placeholder {
-    color: var(--secondary);
-}
-
-.custom-input:focus {
-    border-color: var(--blue);
 }
 
 /* =====================================
@@ -519,36 +390,6 @@ h1 {
 }
 
 /* =====================================
-   RESPONSIVE — IPAD LANDSCAPE+
-===================================== */
-
-@media (min-width: 901px) {
-
-    .container {
-        max-width: 1000px;
-    }
-
-    .content-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        align-items: start;
-    }
-
-}
-
-@media (min-width: 1200px) {
-
-    .container {
-        max-width: 1040px;
-    }
-
-    .content-grid {
-        gap: 22px;
-    }
-
-}
-
-/* =====================================
    REDUCED MOTION
 ===================================== */
 
@@ -600,155 +441,127 @@ h1 {
 
 
     <!-- =================================
-         CONTENT GRID
+         CONFIGURATION & INSTALL
     ================================== -->
 
-    <div class="content-grid">
+    <section class="card">
 
-        <!-- DNS SERVER PICKER -->
+        <h2 class="card-title">Configuration</h2>
 
-        <section class="card">
+        <div class="info">
+            <span class="label">Profile Name</span>
+            <span class="value">DNS NRG</span>
+        </div>
 
-            <h2 class="card-title">DNS Server</h2>
+        <div class="info">
+            <span class="label">Profile File</span>
+            <span class="value">NRG-DNS.mobileconfig</span>
+        </div>
 
-            <div class="server-list" id="serverList"></div>
+        <div class="info">
+            <span class="label">Server</span>
+            <span class="value">NextDNS (81d731)</span>
+        </div>
 
-            <div class="custom-wrap" id="customWrap">
+        <div class="info">
+            <span class="label">Protocol</span>
+            <span class="value">DNS over HTTPS</span>
+        </div>
 
-                <input
-                    class="custom-input"
-                    id="customInput"
-                    type="url"
-                    inputmode="url"
-                    autocapitalize="off"
-                    autocorrect="off"
-                    spellcheck="false"
-                    placeholder="https://your-dns.example/dns-query">
+        <div class="info">
+            <span class="label">Platform</span>
+            <span class="value">iOS / iPadOS</span>
+        </div>
 
+        <div class="info">
+            <span class="label">Status</span>
+            <span class="value ready" id="status">Ready</span>
+        </div>
+
+        <button class="install-btn"
+                id="installBtn"
+                onclick="installDNS()">
+
+            ↓ &nbsp; Install DNS Profile
+
+        </button>
+
+        <div class="description" id="message">
+            Tap Install DNS Profile to download the configuration profile.
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         TELEGRAM
+    ================================== -->
+
+    <section class="card">
+
+        <h2 class="card-title">Telegram Community</h2>
+
+        <p class="steps">
+            Join our Telegram community for updates,
+            support and announcements.
+        </p>
+
+        <a class="telegram-btn"
+           id="telegramBtn"
+           href="https://t.me/official_channel_NRG_dev"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            ✈ &nbsp; JOIN TELEGRAM
+
+        </a>
+
+    </section>
+
+
+    <!-- =================================
+         INSTALLATION GUIDE
+    ================================== -->
+
+    <section class="card">
+
+        <h2 class="card-title">Installation Guide</h2>
+
+        <div class="steps">
+
+            <div class="step">
+                <span class="number">1</span>
+                <span>Open this page in <b>Safari</b> on your iPhone or iPad.</span>
             </div>
 
-        </section>
-
-
-        <!-- CONFIGURATION + INSTALL -->
-
-        <section class="card">
-
-            <h2 class="card-title">Configuration</h2>
-
-            <div class="info">
-                <span class="label">Profile Name</span>
-                <span class="value">NRG DNS</span>
+            <div class="step">
+                <span class="number">2</span>
+                <span>Tap <b>Install DNS Profile</b>.</span>
             </div>
 
-            <div class="info">
-                <span class="label">Profile File</span>
-                <span class="value">NRG-DNS.mobileconfig</span>
+            <div class="step">
+                <span class="number">3</span>
+                <span>When iOS asks permission to download the profile, tap <b>Allow</b>.</span>
             </div>
 
-            <div class="info">
-                <span class="label">Server</span>
-                <span class="value" id="infoServer">NRG DNS</span>
+            <div class="step">
+                <span class="number">4</span>
+                <span>Open <b>Settings</b> and tap <b>Profile Downloaded</b>.</span>
             </div>
 
-            <div class="info">
-                <span class="label">Protocol</span>
-                <span class="value" id="infoProtocol">DNS over HTTPS</span>
+            <div class="step">
+                <span class="number">5</span>
+                <span>Select <b>DNS NRG</b>, tap <b>Install</b> and confirm.</span>
             </div>
 
-            <div class="info">
-                <span class="label">Platform</span>
-                <span class="value">iOS / iPadOS</span>
+            <div class="step">
+                <span class="number">6</span>
+                <span>Verify under <b>Settings → General → VPN &amp; Device Management</b>.</span>
             </div>
 
-            <div class="info">
-                <span class="label">Status</span>
-                <span class="value ready" id="status">Ready</span>
-            </div>
+        </div>
 
-            <button class="install-btn"
-                    id="installBtn"
-                    onclick="installDNS()">
-
-                ↓ &nbsp; Start DNS
-
-            </button>
-
-            <div class="description" id="message">
-                Choose a server, then tap Start DNS to download
-                your configuration profile.
-            </div>
-
-        </section>
-
-
-        <!-- TELEGRAM -->
-
-        <section class="card">
-
-            <h2 class="card-title">Telegram Community</h2>
-
-            <p class="steps">
-                Join our Telegram community for updates,
-                support and announcements.
-            </p>
-
-            <a class="telegram-btn"
-               id="telegramBtn"
-               href="https://t.me/official_channel_NRG_dev"
-               target="_blank"
-               rel="noopener noreferrer">
-
-                ✈ &nbsp; JOIN TELEGRAM
-
-            </a>
-
-        </section>
-
-
-        <!-- INSTALLATION GUIDE -->
-
-        <section class="card">
-
-            <h2 class="card-title">Installation Guide</h2>
-
-            <div class="steps">
-
-                <div class="step">
-                    <span class="number">1</span>
-                    <span>Open this page in <b>Safari</b> on your iPhone or iPad.</span>
-                </div>
-
-                <div class="step">
-                    <span class="number">2</span>
-                    <span>Pick a DNS server and tap <b>Start DNS</b>.</span>
-                </div>
-
-                <div class="step">
-                    <span class="number">3</span>
-                    <span>When iOS asks permission to download the profile, tap <b>Allow</b>.</span>
-                </div>
-
-                <div class="step">
-                    <span class="number">4</span>
-                    <span>Open <b>Settings</b> and tap <b>Profile Downloaded</b>.</span>
-                </div>
-
-                <div class="step">
-                    <span class="number">5</span>
-                    <span>Select <b>NRG DNS</b>, tap <b>Install</b> and confirm.</span>
-                </div>
-
-                <div class="step">
-                    <span class="number">6</span>
-                    <span>Verify under <b>Settings → General → VPN &amp; Device Management</b>.</span>
-                </div>
-
-            </div>
-
-        </section>
-
-    </div>
+    </section>
 
 
     <!-- =================================
@@ -772,134 +585,75 @@ h1 {
 <script>
 
 /* =====================================
-   CONFIGURATION
+   CONSTANTS
 ===================================== */
 
-// Official NRG profile (hosted on GitHub)
-const PROFILE_URL =
-"https://raw.githubusercontent.com/nrgengine0/NRG-DNS/refs/heads/main/NRG.mobileconfig";
+const TELEGRAM_LINK = "https://t.me/official_channel_NRG_dev";
 
-const TELEGRAM_LINK =
-"https://t.me/official_channel_NRG_dev";
+// Single NextDNS profile (81d731) — exact configuration provided.
+const PROFILE_XML = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>DNSSettings</key>
+			<dict>
+				<key>DNSProtocol</key>
+				<string>HTTPS</string>
+				<key>ServerAddresses</key>
+				<array>
+					<string>45.90.28.0</string>
+					<string>45.90.30.0</string>
+				</array>
+				<key>ServerURL</key>
+				<string>https://dns.nextdns.io/81d731</string>
+			</dict>
+			<key>PayloadDisplayName</key>
+			<string>DNS OW_Antiban</string>
+			<key>PayloadIdentifier</key>
+			<string>com.owen.nextdns.81d731.dns</string>
+			<key>PayloadType</key>
+			<string>com.apple.dnsSettings.managed</string>
+			<key>PayloadUUID</key>
+			<string>4B4392C3-8BAB-412E-9309-21EF710360FB</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>PayloadOrganization</key>
+			<string>OWEN</string>
+		</dict>
+	</array>
+	<key>PayloadDisplayName</key>
+	<string>DNS OW_Antiban</string>
+	<key>PayloadDescription</key>
+	<string>Uses NextDNS configuration 81d731. Filtering rules must be configured in the NextDNS dashboard.</string>
+	<key>PayloadIdentifier</key>
+	<string>com.owen.nextdns.81d731</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>63F03DDC-81E1-4895-A33D-A1ED87307DD5</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+	<key>PayloadOrganization</key>
+	<string>OWEN</string>
+</dict>
+</plist>`;
 
 
 /* =====================================
-   SERVER PRESETS
+   HELPERS
 ===================================== */
-
-const PRESETS = [
-    {
-        id: "nrg",
-        name: "NRG DNS",
-        desc: "Official NRG configuration",
-        remote: true
-    },
-    {
-        id: "cloudflare",
-        name: "Cloudflare",
-        desc: "1.1.1.1 · Fast & private",
-        serverURL: "https://cloudflare-dns.com/dns-query"
-    },
-    {
-        id: "google",
-        name: "Google Public DNS",
-        desc: "8.8.8.8 · Reliable & global",
-        serverURL: "https://dns.google/dns-query"
-    },
-    {
-        id: "quad9",
-        name: "Quad9",
-        desc: "9.9.9.9 · Blocks malicious domains",
-        serverURL: "https://dns.quad9.net/dns-query"
-    },
-    {
-        id: "adguard",
-        name: "AdGuard DNS",
-        desc: "Ads & tracker blocking",
-        serverURL: "https://dns.adguard-dns.com/dns-query"
-    },
-    {
-        id: "custom",
-        name: "Custom DoH",
-        desc: "Use your own resolver URL",
-        custom: true
-    }
-];
-
-
-/* =====================================
-   STATE
-===================================== */
-
-let selected = PRESETS[0];
 
 const $ = (id) => document.getElementById(id);
 
 
-/* =====================================
-   RENDER SERVER LIST
-===================================== */
-
-function renderServers() {
-
-    const list = $("serverList");
-
-    list.innerHTML = PRESETS.map(p => `
-        <button type="button"
-                class="server-item ${p.id === selected.id ? "active" : ""}"
-                data-id="${p.id}">
-
-            <span class="radio"></span>
-
-            <span class="server-text">
-                <span class="server-name">${p.name}</span>
-                <span class="server-desc">${p.desc}</span>
-            </span>
-
-        </button>
-    `).join("");
-
-    list.querySelectorAll(".server-item").forEach(btn => {
-        btn.addEventListener("click", () => selectPreset(btn.dataset.id));
-    });
-}
-
-
-/* =====================================
-   SELECT PRESET
-===================================== */
-
-function selectPreset(id) {
-
-    selected = PRESETS.find(p => p.id === id) || PRESETS[0];
-
-    $("customWrap").classList.toggle("show", !!selected.custom);
-
-    $("infoServer").textContent = selected.custom
-        ? "Custom DoH"
-        : selected.name;
-
-    $("infoProtocol").textContent = "DNS over HTTPS";
-
-    setStatus("Ready", "ready");
-
-    $("message").textContent =
-        "Choose a server, then tap Start DNS to download your configuration profile.";
-
-    renderServers();
-}
-
-
-/* =====================================
-   STATUS HELPERS
-===================================== */
-
 function setStatus(text, cls) {
-
     const el = $("status");
-
     el.textContent = text;
-
     el.className = "value " + (cls || "");
 }
 
@@ -909,95 +663,13 @@ function setMessage(text) {
 }
 
 
-/* =====================================
-   MOBILECONFIG BUILDER
-===================================== */
-
-function uuid() {
-
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
-
-        const r = Math.random() * 16 | 0;
-        const v = c === "x" ? r : (r & 0x3 | 0x8);
-
-        return v.toString(16);
-
-    }).toUpperCase();
+function isIOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 }
 
-
-function escapeXML(str) {
-
-    return String(str).replace(/[<>&'"]/g, c => ({
-        "<": "&lt;",
-        ">": "&gt;",
-        "&": "&amp;",
-        "'": "&apos;",
-        "\"": "&quot;"
-    }[c]));
-}
-
-
-function buildMobileConfig(displayName, dohURL) {
-
-    const payloadUUID = uuid();
-    const rootUUID = uuid();
-
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>PayloadContent</key>
-    <array>
-        <dict>
-            <key>PayloadType</key>
-            <string>com.apple.dnsSettings.managed</string>
-            <key>PayloadIdentifier</key>
-            <string>com.nrg.dns.settings</string>
-            <key>PayloadUUID</key>
-            <string>${payloadUUID}</string>
-            <key>PayloadVersion</key>
-            <integer>1</integer>
-            <key>PayloadDisplayName</key>
-            <string>${escapeXML(displayName)} DNS Settings</string>
-            <key>DNSSettings</key>
-            <dict>
-                <key>DNSProtocol</key>
-                <string>HTTPS</string>
-                <key>ServerURL</key>
-                <string>${escapeXML(dohURL)}</string>
-            </dict>
-            <key>ProhibitDisablement</key>
-            <false/>
-        </dict>
-    </array>
-    <key>PayloadType</key>
-    <string>Configuration</string>
-    <key>PayloadIdentifier</key>
-    <string>com.nrg.dns</string>
-    <key>PayloadUUID</key>
-    <string>${rootUUID}</string>
-    <key>PayloadVersion</key>
-    <integer>1</integer>
-    <key>PayloadDisplayName</key>
-    <string>${escapeXML(displayName)}</string>
-    <key>PayloadDescription</key>
-    <string>Secure DNS over HTTPS configuration for iOS and iPadOS.</string>
-    <key>PayloadOrganization</key>
-    <string>NRG DNS</string>
-    <key>PayloadRemovalDisallowed</key>
-    <false/>
-</dict>
-</plist>`;
-}
-
-
-/* =====================================
-   DOWNLOAD HELPER
-===================================== */
 
 function downloadBlob(filename, content) {
-
     const blob = new Blob([content], {
         type: "application/x-apple-aspen-config"
     });
@@ -1013,19 +685,7 @@ function downloadBlob(filename, content) {
     a.click();
     document.body.removeChild(a);
 
-    // Keep the URL alive long enough for iOS to start the download
     setTimeout(() => URL.revokeObjectURL(url), 60000);
-}
-
-
-/* =====================================
-   iOS DETECTION
-===================================== */
-
-function isIOS() {
-
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 }
 
 
@@ -1037,51 +697,17 @@ function installDNS() {
 
     const button = $("installBtn");
 
-    /* --- Platform check --- */
-
     if (!isIOS()) {
 
         setStatus("iOS Required", "error");
 
         setMessage(
-            "Please open NRG DNS in Safari on your iPhone or iPad " +
-            "to install the configuration profile."
+            "Please open this page in Safari on your iPhone or iPad " +
+            "to install the DNS profile."
         );
 
         return;
     }
-
-
-    /* --- Resolve the target --- */
-
-    let dohURL = null;
-
-    if (selected.custom) {
-
-        const raw = $("customInput").value.trim();
-
-        if (!/^https:\/\/[^\s]+\.[^\s]+/i.test(raw)) {
-
-            setStatus("Invalid URL", "error");
-
-            setMessage(
-                "Enter a valid HTTPS resolver URL, " +
-                "for example: https://dns.example.com/dns-query"
-            );
-
-            return;
-        }
-
-        dohURL = raw;
-
-    } else if (selected.serverURL) {
-
-        dohURL = selected.serverURL;
-
-    }
-
-
-    /* --- Start --- */
 
     button.disabled = true;
 
@@ -1089,21 +715,9 @@ function installDNS() {
 
     setMessage("Waiting for the iOS profile download confirmation…");
 
-
     try {
 
-        if (selected.remote) {
-
-            // Official profile — hand off to Safari
-            window.location.assign(PROFILE_URL);
-
-        } else {
-
-            // Generated profile — build and download
-            const xml = buildMobileConfig(selected.name, dohURL);
-
-            downloadBlob("NRG-DNS.mobileconfig", xml);
-        }
+        downloadBlob("NRG-DNS.mobileconfig", PROFILE_XML);
 
     } catch (err) {
 
@@ -1116,9 +730,6 @@ function installDNS() {
         return;
     }
 
-
-    /* --- UI feedback (not installation confirmation) --- */
-
     setTimeout(() => {
 
         button.disabled = false;
@@ -1127,7 +738,7 @@ function installDNS() {
 
         setMessage(
             "If you tapped Allow, open Settings → Profile Downloaded " +
-            "to finish installing NRG DNS."
+            "to finish installing DNS NRG."
         );
 
     }, 3000);
@@ -1155,7 +766,6 @@ function applyTheme(dark) {
 
 
 function toggleTheme() {
-
     applyTheme(!document.body.classList.contains("dark"));
 }
 
@@ -1169,11 +779,8 @@ function initTheme() {
     } catch (e) { /* ignore */ }
 
     if (saved) {
-
         applyTheme(saved === "dark");
-
     } else {
-
         applyTheme(
             window.matchMedia &&
             window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -1189,10 +796,6 @@ function initTheme() {
 document.addEventListener("DOMContentLoaded", () => {
 
     initTheme();
-
-    renderServers();
-
-    selectPreset("nrg");
 
     $("telegramBtn").href = TELEGRAM_LINK;
 
