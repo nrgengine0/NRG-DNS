@@ -546,7 +546,7 @@ and (max-width: 900px) {
                 </span>
 
                 <span class="value">
-                    NRG.mobileconfig
+                    ************
                 </span>
 
             </div>
@@ -757,83 +757,39 @@ const TELEGRAM_LINK =
 ===================================== */
 
 function installDNS() {
+    const status = document.getElementById("status");
+    const message = document.getElementById("message");
+    const button = document.getElementById("installBtn");
 
-    const status =
-        document.getElementById("status");
-
-    const message =
-        document.getElementById("message");
-
-    const button =
-        document.getElementById("installBtn");
-
-
-    // Detect iOS / iPadOS
-
-    const isIOS =
-        /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-        (
-            navigator.platform === "MacIntel" &&
-            navigator.maxTouchPoints > 1
-        );
-
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
     if (!isIOS) {
-
         status.textContent = "iOS Required";
-
-        message.textContent =
-            "Please open NRG DNS using Safari on your iPhone or iPad.";
-
+        message.textContent = "Please open this page in Safari on your iPhone or iPad.";
         return;
-
     }
-
-
-    // Check configuration
-
-    if (!PROFILE_URL.endsWith(".mobileconfig")) {
-
-        status.textContent = "Invalid Profile";
-
-        message.textContent =
-            "Please check your NRG DNS profile URL.";
-
-        return;
-
-    }
-
 
     status.textContent = "Opening Profile";
-
-    message.textContent =
-        "Waiting for iOS profile download confirmation...";
-
-
+    message.textContent = "iOS will ask whether to download the configuration profile. Tap Allow.";
     button.disabled = true;
 
-
-    // Directly open mobileconfig.
-    // Safari handles the native download permission prompt.
-
-    window.location.assign(PROFILE_URL);
-
-
-    // This is only a UI status, not installation confirmation.
+    // Open the .mobileconfig directly from the click gesture (no delayed redirect).
+    // iOS/Safari displays the native profile-download confirmation.
+    const link = document.createElement("a");
+    link.href = PROFILE_URL;
+    link.target = "_self";
+    link.rel = "noopener";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
     setTimeout(() => {
-
         status.textContent = "Profile Requested";
-
-        message.textContent =
-            "If you tapped Allow, open Settings → Profile Downloaded to install NRG DNS.";
-
+        message.textContent = "Tap Allow in the iOS prompt. Then go to Settings → Profile Downloaded → Install.";
         button.disabled = false;
-
-    }, 3000);
-
+    }, 1800);
 }
-
 
 /* =====================================
    DARK / LIGHT MODE
