@@ -12,11 +12,6 @@ content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cove
 <title>NRG DNS</title>
 
 <style>
-
-/* =====================================
-   NRG DNS - RESPONSIVE DESIGN
-===================================== */
-
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -49,30 +44,15 @@ html {
 
 body {
     margin: 0;
-    padding:
-        clamp(14px, 3vw, 32px);
-
+    padding: clamp(14px, 3vw, 32px);
     min-height: 100vh;
     width: 100%;
-
     background: var(--bg);
     color: var(--text);
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "Helvetica Neue",
-        sans-serif;
-
-    transition:
-        background .25s,
-        color .25s;
+    font-family: -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", "Helvetica Neue", sans-serif;
+    transition: background .25s, color .25s;
 }
-
-/* =====================================
-   MAIN CONTAINER
-===================================== */
 
 .container {
     width: 100%;
@@ -80,46 +60,30 @@ body {
     margin: 0 auto;
 }
 
-/* =====================================
-   HEADER
-===================================== */
-
 .header {
     text-align: center;
-
-    margin:
-        clamp(35px, 5vw, 55px)
-        0 30px;
+    margin: clamp(35px, 5vw, 55px) 0 30px;
 }
 
 .logo {
     width: clamp(65px, 9vw, 85px);
     height: clamp(65px, 9vw, 85px);
-
     border-radius: 25px;
     margin: auto;
-
-    background:
-        linear-gradient(145deg,#168bff,#0055d4);
-
+    background: linear-gradient(145deg,#168bff,#0055d4);
     color: white;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: clamp(30px, 4vw, 40px);
     font-weight: 800;
-
     box-shadow: 0 8px 25px #007aff40;
 }
 
 h1 {
     font-size: clamp(26px, 4vw, 36px);
     font-weight: 800;
-
     margin: 17px 0 6px;
-
     letter-spacing: 1px;
 }
 
@@ -128,87 +92,49 @@ h1 {
     color: var(--secondary);
 }
 
-/* =====================================
-   THEME BUTTON
-===================================== */
-
 .theme-btn {
     position: fixed;
-
     z-index: 100;
-
     top: max(15px, env(safe-area-inset-top));
     right: max(15px, env(safe-area-inset-right));
-
     border: none;
-
     background: var(--card);
     color: var(--text);
-
     padding: 11px 14px;
-
     border-radius: 12px;
-
     font-size: 19px;
-
     cursor: pointer;
-
     box-shadow: 0 2px 10px #00000010;
 }
-
-/* =====================================
-   RESPONSIVE GRID
-===================================== */
 
 .content-grid {
     display: grid;
     grid-template-columns: 1fr;
-
     gap: 16px;
 }
 
-/* =====================================
-   CARDS
-===================================== */
-
 .card {
     width: 100%;
-
     background: var(--card);
-
-    border-radius:
-        clamp(16px, 2vw, 22px);
-
-    padding:
-        clamp(17px, 2.5vw, 25px);
-
+    border-radius: clamp(16px, 2vw, 22px);
+    padding: clamp(17px, 2.5vw, 25px);
     box-shadow: 0 3px 15px #00000008;
+    min-width: 0;
 }
 
 .card-title {
     font-size: clamp(16px, 2vw, 19px);
-
     font-weight: 750;
-
     margin-bottom: 15px;
 }
 
-/* =====================================
-   INFORMATION
-===================================== */
-
 .info {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
     gap: 12px;
-
     padding: 14px 0;
-
     border-bottom: 1px solid var(--border);
-
     font-size: clamp(13px, 1.5vw, 15px);
 }
 
@@ -230,32 +156,19 @@ h1 {
     color: var(--green);
 }
 
-/* =====================================
-   BUTTONS
-===================================== */
-
 .install-btn {
     display: block;
-
     width: 100%;
     min-height: 52px;
-
     border: none;
-
     background: var(--blue);
     color: white;
-
     padding: 16px;
-
     border-radius: 15px;
-
     font-size: clamp(15px, 2vw, 17px);
     font-weight: 750;
-
     cursor: pointer;
-
     box-shadow: 0 5px 15px #007aff35;
-
     transition: .2s;
 }
 
@@ -272,83 +185,52 @@ h1 {
 
 .telegram-btn {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     width: 100%;
     min-height: 50px;
-
     text-align: center;
     text-decoration: none;
-
     background: #229ed9;
     color: white;
-
     padding: 16px;
-
     border-radius: 15px;
-
     font-size: clamp(14px, 2vw, 16px);
     font-weight: 750;
-
     margin-top: 14px;
-
     transition: .2s;
 }
 
-/* =====================================
-   DESCRIPTION
-===================================== */
-
 .description {
     font-size: clamp(12px, 1.5vw, 14px);
-
     color: var(--secondary);
-
     line-height: 1.7;
-
     text-align: center;
-
     margin-top: 15px;
 }
 
 .steps {
     font-size: clamp(13px, 1.6vw, 15px);
-
     color: var(--secondary);
-
     line-height: 1.8;
 }
 
-/* =====================================
-   INSTALLATION STEPS
-===================================== */
-
 .step {
     display: flex;
-
     align-items: flex-start;
-
     gap: 12px;
-
     margin: 13px 0;
 }
 
 .number {
     min-width: 27px;
     height: 27px;
-
     border-radius: 50%;
-
     background: #e8f2ff;
     color: #007aff;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     font-weight: 750;
 }
 
@@ -357,34 +239,19 @@ body.dark .number {
     color: #63adff;
 }
 
-/* =====================================
-   FOOTER
-===================================== */
-
 .footer {
     text-align: center;
-
     color: var(--secondary);
-
     font-size: 12px;
-
     margin-top: 30px;
-
-    padding:
-        15px 0
-        max(15px, env(safe-area-inset-bottom));
+    padding: 15px 0 max(15px, env(safe-area-inset-bottom));
 }
 
 .footer b {
     color: var(--text);
 }
 
-/* =====================================
-   IPHONE
-===================================== */
-
 @media (max-width: 600px) {
-
     body {
         padding: 15px;
     }
@@ -400,20 +267,9 @@ body.dark .number {
     .content-grid {
         grid-template-columns: 1fr;
     }
-
-    .card {
-        margin-bottom: 0;
-    }
-
 }
 
-/* =====================================
-   IPAD PORTRAIT
-===================================== */
-
-@media (min-width: 601px)
-and (max-width: 900px) {
-
+@media (min-width: 601px) and (max-width: 900px) {
     body {
         padding: 28px;
     }
@@ -426,15 +282,9 @@ and (max-width: 900px) {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-
 }
 
-/* =====================================
-   IPAD LANDSCAPE / TABLET
-===================================== */
-
 @media (min-width: 901px) {
-
     .container {
         max-width: 1000px;
     }
@@ -444,15 +294,9 @@ and (max-width: 900px) {
         gap: 20px;
         align-items: start;
     }
-
 }
 
-/* =====================================
-   LARGE DESKTOP
-===================================== */
-
 @media (min-width: 1200px) {
-
     .container {
         max-width: 1100px;
     }
@@ -460,64 +304,37 @@ and (max-width: 900px) {
     .content-grid {
         gap: 22px;
     }
-
 }
 
-/* =====================================
-   REDUCED MOTION
-===================================== */
-
 @media (prefers-reduced-motion: reduce) {
-
     * {
         transition: none !important;
         scroll-behavior: auto !important;
     }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- THEME BUTTON -->
-
 <button class="theme-btn"
         onclick="toggleTheme()"
         id="themeBtn"
         aria-label="Toggle dark mode">
-
     🌙
-
 </button>
-
 
 <div class="container">
 
-    <!-- =================================
-         HEADER
-    ================================== -->
-
     <div class="header">
-
         <div class="logo">N</div>
-
         <h1>NRG DNS</h1>
-
         <div class="subtitle">
             Secure DNS Configuration for iOS
         </div>
-
     </div>
 
-
-    <!-- =================================
-         RESPONSIVE CONTENT GRID
-    ================================== -->
-
     <div class="content-grid">
-
 
         <!-- CONFIGURATION -->
 
@@ -528,58 +345,28 @@ and (max-width: 900px) {
             </div>
 
             <div class="info">
-
-                <span class="label">
-                    Profile Name
-                </span>
-
-                <span class="value">
-                    NRG DNS
-                </span>
-
+                <span class="label">Profile Name</span>
+                <span class="value">NRG DNS</span>
             </div>
 
             <div class="info">
-
-                <span class="label">
-                    Profile File
-                </span>
-
-                <span class="value">
-                    ************
-                </span>
-
+                <span class="label">Profile File</span>
+                <span class="value">**************</span>
             </div>
 
             <div class="info">
-
-                <span class="label">
-                    Platform
-                </span>
-
-                <span class="value">
-                    iOS / iPadOS
-                </span>
-
+                <span class="label">Platform</span>
+                <span class="value">iOS / iPadOS</span>
             </div>
 
             <div class="info">
-
-                <span class="label">
-                    Status
-                </span>
-
-                <span class="value ready"
-                      id="status">
-
+                <span class="label">Status</span>
+                <span class="value ready" id="status">
                     Ready
-
                 </span>
-
             </div>
 
         </div>
-
 
         <!-- DNS INSTALL -->
 
@@ -599,19 +386,15 @@ and (max-width: 900px) {
                 id="installBtn"
                 onclick="installDNS()">
 
-                ↓ &nbsp; Start DNS
+                ↓ &nbsp; INSTALL DNS
 
             </button>
 
-            <div class="description"
-                 id="message">
-
-                Tap Start DNS to download your configuration profile.
-
+            <div class="description" id="message">
+                Tap INSTALL DNS to download your configuration profile.
             </div>
 
         </div>
-
 
         <!-- TELEGRAM -->
 
@@ -622,10 +405,8 @@ and (max-width: 900px) {
             </div>
 
             <p class="steps">
-
                 Join our Telegram community for updates,
                 support and announcements.
-
             </p>
 
             <a
@@ -640,7 +421,6 @@ and (max-width: 900px) {
 
         </div>
 
-
         <!-- INSTALLATION GUIDE -->
 
         <div class="card">
@@ -651,88 +431,45 @@ and (max-width: 900px) {
 
             <div class="steps">
 
-
                 <div class="step">
-
                     <span class="number">1</span>
-
-                    <span>
-                        Tap Start DNS to download the profile.
-                    </span>
-
+                    <span>Open this website using Safari.</span>
                 </div>
 
-
                 <div class="step">
-
                     <span class="number">2</span>
-
-                    <span>
-                        When iOS asks permission to download
-                        the configuration profile, tap Allow.
-                    </span>
-
+                    <span>Tap INSTALL DNS.</span>
                 </div>
 
-
                 <div class="step">
-
                     <span class="number">3</span>
-
-                    <span>
-                        Open Settings and tap Profile Downloaded.
-                    </span>
-
+                    <span>When iOS asks permission to download the configuration profile, tap Allow.</span>
                 </div>
 
-
                 <div class="step">
-
                     <span class="number">4</span>
-
-                    <span>
-                        Select the NRG DNS configuration profile.
-                    </span>
-
+                    <span>Open Settings → Profile Downloaded.</span>
                 </div>
 
-
                 <div class="step">
-
                     <span class="number">5</span>
-
-                    <span>
-                        Tap Install and follow the confirmation steps.
-                    </span>
-
+                    <span>Select NRG DNS and tap Install.</span>
                 </div>
 
             </div>
 
         </div>
 
-
     </div>
 
-
-    <!-- =================================
-         FOOTER
-    ================================== -->
-
     <div class="footer">
-
         <b>NRG DNS</b><br>
-
         iOS DNS Configuration Installer
-
         <br><br>
-
         © 2026 NRG DNS. All Rights Reserved.
-
     </div>
 
 </div>
-
 
 <script>
 
@@ -740,56 +477,77 @@ and (max-width: 900px) {
    NRG DNS CONFIGURATION
 ===================================== */
 
-// GitHub RAW PROFILE URL
-
-const PROFILE_URL =
-"https://raw.githubusercontent.com/nrgengine0/NRG-DNS/refs/heads/main/NRG.mobileconfig";
-
-
-// Telegram JOIN LINK
+// Vercel-hosted profile path
+const PROFILE_URL = "/NRG.mobileconfig";
 
 const TELEGRAM_LINK =
 "https://t.me/official_channel_NRG_dev";
 
 
 /* =====================================
-   DNS PROFILE DOWNLOAD
+   DNS PROFILE INSTALL
 ===================================== */
 
 function installDNS() {
-    const status = document.getElementById("status");
-    const message = document.getElementById("message");
-    const button = document.getElementById("installBtn");
 
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const status =
+        document.getElementById("status");
+
+    const message =
+        document.getElementById("message");
+
+    const button =
+        document.getElementById("installBtn");
+
+    const isIOS =
+        /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (
+            navigator.platform === "MacIntel" &&
+            navigator.maxTouchPoints > 1
+        );
 
     if (!isIOS) {
+
         status.textContent = "iOS Required";
-        message.textContent = "Please open this page in Safari on your iPhone or iPad.";
+
+        message.textContent =
+            "Please open this website using Safari on your iPhone or iPad.";
+
         return;
     }
 
     status.textContent = "Opening Profile";
-    message.textContent = "iOS will ask whether to download the configuration profile. Tap Allow.";
+
+    message.textContent =
+        "Opening NRG DNS profile. If prompted, tap Allow.";
+
     button.disabled = true;
 
-    // Open the .mobileconfig directly from the click gesture (no delayed redirect).
-    // iOS/Safari displays the native profile-download confirmation.
-    const link = document.createElement("a");
-    link.href = PROFILE_URL;
-    link.target = "_self";
-    link.rel = "noopener";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    // Direct navigation from the user's click.
+    // Vercel must serve this file with Apple's profile MIME type.
+
+    window.location.assign(PROFILE_URL);
+
+    // The browser navigates away, so this timer is only
+    // a fallback for cases where navigation is blocked.
 
     setTimeout(() => {
-        status.textContent = "Profile Requested";
-        message.textContent = "Tap Allow in the iOS prompt. Then go to Settings → Profile Downloaded → Install.";
+
         button.disabled = false;
-    }, 1800);
+
+        if (status.textContent === "Opening Profile") {
+
+            status.textContent = "Profile Requested";
+
+            message.textContent =
+                "If the profile prompt did not appear, open Safari and try again.";
+
+        }
+
+    }, 5000);
+
 }
+
 
 /* =====================================
    DARK / LIGHT MODE
@@ -802,10 +560,8 @@ function toggleTheme() {
     const dark =
         document.body.classList.contains("dark");
 
-
     document.getElementById("themeBtn").textContent =
         dark ? "☀️" : "🌙";
-
 
     document.querySelector(
         'meta[name="theme-color"]'
@@ -821,9 +577,8 @@ function toggleTheme() {
    TELEGRAM LINK
 ===================================== */
 
-document.querySelector(
-    ".telegram-btn"
-).href = TELEGRAM_LINK;
+document.querySelector(".telegram-btn").href =
+    TELEGRAM_LINK;
 
 
 /* =====================================
