@@ -1,20 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+      content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
 
-<meta name="theme-color" content="#f5f5fa">
+<meta name="theme-color" content="#f2f3f8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="NRG DNS">
+<meta name="description" content="Install a secure DNS over HTTPS profile on your iPhone or iPad with NRG DNS.">
 
-<title>NRG DNS</title>
+<title>NRG DNS — Secure DNS for iOS</title>
 
 <style>
 
 /* =====================================
-   NRG DNS - RESPONSIVE DESIGN
+   NRG DNS — iOS DNS PROFILE INSTALLER
 ===================================== */
 
 * {
@@ -23,21 +26,27 @@ content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cove
 }
 
 :root {
-    --bg: #f5f5fa;
+    --bg: #f2f3f8;
     --card: #ffffff;
-    --text: #17171c;
-    --secondary: #85858f;
-    --border: #eeeeF3;
-    --blue: #007aff;
-    --green: #16a765;
+    --text: #111117;
+    --secondary: #7c7c8a;
+    --border: #e7e7ef;
+    --blue: #0a84ff;
+    --blue-soft: rgba(10, 132, 255, .10);
+    --green: #15b364;
+    --shadow: 0 4px 22px rgba(16, 20, 40, .06);
 }
 
 body.dark {
-    --bg: #101014;
-    --card: #1c1c22;
-    --text: #ffffff;
-    --secondary: #9999a4;
-    --border: #303038;
+    --bg: #0b0b0f;
+    --card: #17171d;
+    --text: #f2f2f7;
+    --secondary: #8e8e9a;
+    --border: #2a2a33;
+    --blue: #3d9bff;
+    --blue-soft: rgba(61, 155, 255, .14);
+    --green: #2ed47a;
+    --shadow: 0 4px 22px rgba(0, 0, 0, .45);
 }
 
 html {
@@ -49,11 +58,10 @@ html {
 
 body {
     margin: 0;
-    padding:
-        clamp(14px, 3vw, 32px);
-
     min-height: 100vh;
     width: 100%;
+
+    padding: clamp(14px, 3vw, 32px);
 
     background: var(--bg);
     color: var(--text);
@@ -65,18 +73,28 @@ body {
         "Helvetica Neue",
         sans-serif;
 
-    transition:
-        background .25s,
-        color .25s;
+    transition: background .25s, color .25s;
 }
 
-/* =====================================
-   MAIN CONTAINER
-===================================== */
+/* Soft ambient glow */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(60vw 60vw at 10% -12%, rgba(10, 132, 255, .18), transparent 62%),
+        radial-gradient(52vw 52vw at 100% 0%, rgba(122, 84, 255, .14), transparent 62%);
+}
 
 .container {
+    position: relative;
+    z-index: 1;
+
     width: 100%;
-    max-width: 1100px;
+    max-width: 1040px;
     margin: 0 auto;
 }
 
@@ -86,23 +104,18 @@ body {
 
 .header {
     text-align: center;
-
-    margin:
-        clamp(35px, 5vw, 55px)
-        0 30px;
+    margin: clamp(46px, 6vw, 62px) 0 26px;
 }
 
 .logo {
-    width: clamp(65px, 9vw, 85px);
-    height: clamp(65px, 9vw, 85px);
+    width: clamp(66px, 9vw, 84px);
+    height: clamp(66px, 9vw, 84px);
 
-    border-radius: 25px;
-    margin: auto;
+    border-radius: 24px;
+    margin: 0 auto;
 
-    background:
-        linear-gradient(145deg,#168bff,#0055d4);
-
-    color: white;
+    background: linear-gradient(145deg, #1f96ff, #0052d4);
+    color: #fff;
 
     display: flex;
     align-items: center;
@@ -110,17 +123,16 @@ body {
 
     font-size: clamp(30px, 4vw, 40px);
     font-weight: 800;
+    letter-spacing: -.5px;
 
-    box-shadow: 0 8px 25px #007aff40;
+    box-shadow: 0 12px 30px rgba(0, 122, 255, .32);
 }
 
 h1 {
     font-size: clamp(26px, 4vw, 36px);
     font-weight: 800;
-
-    margin: 17px 0 6px;
-
-    letter-spacing: 1px;
+    letter-spacing: .5px;
+    margin: 16px 0 6px;
 }
 
 .subtitle {
@@ -134,36 +146,41 @@ h1 {
 
 .theme-btn {
     position: fixed;
-
     z-index: 100;
 
-    top: max(15px, env(safe-area-inset-top));
-    right: max(15px, env(safe-area-inset-right));
+    top: max(14px, env(safe-area-inset-top));
+    right: max(14px, env(safe-area-inset-right));
 
-    border: none;
+    border: 1px solid var(--border);
 
     background: var(--card);
     color: var(--text);
 
-    padding: 11px 14px;
+    width: 44px;
+    height: 44px;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     font-size: 19px;
+    line-height: 1;
 
     cursor: pointer;
 
-    box-shadow: 0 2px 10px #00000010;
+    box-shadow: var(--shadow);
+    transition: transform .18s;
+}
+
+.theme-btn:active {
+    transform: scale(.94);
 }
 
 /* =====================================
-   RESPONSIVE GRID
+   GRID
 ===================================== */
 
 .content-grid {
     display: grid;
     grid-template-columns: 1fr;
-
     gap: 16px;
 }
 
@@ -173,51 +190,167 @@ h1 {
 
 .card {
     width: 100%;
-
     background: var(--card);
 
-    border-radius:
-        clamp(16px, 2vw, 22px);
+    border: 1px solid var(--border);
+    border-radius: clamp(16px, 2vw, 22px);
 
-    padding:
-        clamp(17px, 2.5vw, 25px);
+    padding: clamp(17px, 2.5vw, 24px);
 
-    box-shadow: 0 3px 15px #00000008;
+    box-shadow: var(--shadow);
 }
 
 .card-title {
     font-size: clamp(16px, 2vw, 19px);
-
     font-weight: 750;
-
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
 /* =====================================
-   INFORMATION
+   SERVER PICKER
+===================================== */
+
+.server-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.server-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+
+    padding: 12px 14px;
+
+    cursor: pointer;
+    transition: .18s;
+}
+
+.server-item.active {
+    border-color: var(--blue);
+    background: var(--blue-soft);
+}
+
+.radio {
+    flex: 0 0 auto;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+    border: 2px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: .18s;
+}
+
+.server-item.active .radio {
+    border-color: var(--blue);
+}
+
+.server-item.active .radio::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--blue);
+}
+
+.server-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.server-name {
+    font-size: clamp(14px, 1.7vw, 15px);
+    font-weight: 650;
+}
+
+.server-desc {
+    font-size: clamp(11px, 1.3vw, 12.5px);
+    color: var(--secondary);
+    overflow-wrap: anywhere;
+}
+
+/* =====================================
+   CUSTOM INPUT
+===================================== */
+
+.custom-wrap {
+    margin-top: 12px;
+    display: none;
+}
+
+.custom-wrap.show {
+    display: block;
+}
+
+.custom-input {
+    width: 100%;
+
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 13px;
+
+    padding: 13px 14px;
+
+    outline: none;
+    transition: .18s;
+}
+
+.custom-input::placeholder {
+    color: var(--secondary);
+}
+
+.custom-input:focus {
+    border-color: var(--blue);
+}
+
+/* =====================================
+   INFO ROWS
 ===================================== */
 
 .info {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
     gap: 12px;
 
-    padding: 14px 0;
+    padding: 13px 0;
 
     border-bottom: 1px solid var(--border);
 
     font-size: clamp(13px, 1.5vw, 15px);
 }
 
-.info:last-child {
-    border: none;
+.info:last-of-type {
+    border-bottom: none;
 }
 
 .label {
     color: var(--secondary);
+    flex: 0 0 auto;
 }
 
 .value {
@@ -230,6 +363,10 @@ h1 {
     color: var(--green);
 }
 
+.error {
+    color: #ff453a;
+}
+
 /* =====================================
    BUTTONS
 ===================================== */
@@ -240,39 +377,41 @@ h1 {
     width: 100%;
     min-height: 52px;
 
+    margin-top: 16px;
+
     border: none;
 
-    background: var(--blue);
-    color: white;
+    background: linear-gradient(135deg, #1f96ff, #0066e0);
+    color: #fff;
 
     padding: 16px;
 
     border-radius: 15px;
 
+    font-family: inherit;
     font-size: clamp(15px, 2vw, 17px);
     font-weight: 750;
 
     cursor: pointer;
 
-    box-shadow: 0 5px 15px #007aff35;
+    box-shadow: 0 8px 20px rgba(0, 122, 255, .32);
 
-    transition: .2s;
+    transition: transform .18s, opacity .18s;
 }
 
-.install-btn:active,
-.telegram-btn:active {
+.install-btn:active {
     transform: scale(.98);
-    opacity: .85;
+    opacity: .88;
 }
 
 .install-btn:disabled {
     opacity: .6;
     cursor: wait;
+    transform: none;
 }
 
 .telegram-btn {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -283,7 +422,7 @@ h1 {
     text-decoration: none;
 
     background: #229ed9;
-    color: white;
+    color: #fff;
 
     padding: 16px;
 
@@ -294,31 +433,34 @@ h1 {
 
     margin-top: 14px;
 
-    transition: .2s;
+    transition: transform .18s, opacity .18s;
+}
+
+.telegram-btn:active {
+    transform: scale(.98);
+    opacity: .88;
 }
 
 /* =====================================
-   DESCRIPTION
+   TEXT BLOCKS
 ===================================== */
 
 .description {
-    font-size: clamp(12px, 1.5vw, 14px);
-
+    font-size: clamp(12px, 1.5vw, 13.5px);
     color: var(--secondary);
 
-    line-height: 1.7;
+    line-height: 1.65;
 
     text-align: center;
 
-    margin-top: 15px;
+    margin-top: 14px;
 }
 
 .steps {
     font-size: clamp(13px, 1.6vw, 15px);
-
     color: var(--secondary);
-
-    line-height: 1.8;
+    line-height: 1.75;
+    margin: 0;
 }
 
 /* =====================================
@@ -327,34 +469,34 @@ h1 {
 
 .step {
     display: flex;
-
     align-items: flex-start;
-
     gap: 12px;
-
-    margin: 13px 0;
+    margin: 12px 0;
 }
 
 .number {
+    flex: 0 0 auto;
+
     min-width: 27px;
     height: 27px;
 
     border-radius: 50%;
 
-    background: #e8f2ff;
-    color: #007aff;
+    background: var(--blue-soft);
+    color: var(--blue);
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
+    font-size: 13px;
     font-weight: 750;
 }
 
-body.dark .number {
-    background: #203c5d;
-    color: #63adff;
+.step span:last-child {
+    color: var(--text);
+    font-size: clamp(13px, 1.6vw, 14.5px);
+    line-height: 1.55;
 }
 
 /* =====================================
@@ -365,14 +507,11 @@ body.dark .number {
     text-align: center;
 
     color: var(--secondary);
-
     font-size: 12px;
 
     margin-top: 30px;
 
-    padding:
-        15px 0
-        max(15px, env(safe-area-inset-bottom));
+    padding: 15px 0 max(15px, env(safe-area-inset-bottom));
 }
 
 .footer b {
@@ -380,57 +519,7 @@ body.dark .number {
 }
 
 /* =====================================
-   IPHONE
-===================================== */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 15px;
-    }
-
-    .container {
-        max-width: 100%;
-    }
-
-    .header {
-        margin-top: 55px;
-    }
-
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        margin-bottom: 0;
-    }
-
-}
-
-/* =====================================
-   IPAD PORTRAIT
-===================================== */
-
-@media (min-width: 601px)
-and (max-width: 900px) {
-
-    body {
-        padding: 28px;
-    }
-
-    .container {
-        max-width: 720px;
-    }
-
-    .content-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-}
-
-/* =====================================
-   IPAD LANDSCAPE / TABLET
+   RESPONSIVE — IPAD LANDSCAPE+
 ===================================== */
 
 @media (min-width: 901px) {
@@ -447,14 +536,10 @@ and (max-width: 900px) {
 
 }
 
-/* =====================================
-   LARGE DESKTOP
-===================================== */
-
 @media (min-width: 1200px) {
 
     .container {
-        max-width: 1100px;
+        max-width: 1040px;
     }
 
     .content-grid {
@@ -481,11 +566,13 @@ and (max-width: 900px) {
 
 <body>
 
-<!-- THEME BUTTON -->
+<!-- =====================================
+     THEME BUTTON
+====================================== -->
 
 <button class="theme-btn"
-        onclick="toggleTheme()"
         id="themeBtn"
+        onclick="toggleTheme()"
         aria-label="Toggle dark mode">
 
     🌙
@@ -499,218 +586,167 @@ and (max-width: 900px) {
          HEADER
     ================================== -->
 
-    <div class="header">
+    <header class="header">
 
         <div class="logo">N</div>
 
         <h1>NRG DNS</h1>
 
-        <div class="subtitle">
-            Secure DNS Configuration for iOS
-        </div>
+        <p class="subtitle">
+            Secure DNS over HTTPS for iOS &amp; iPadOS
+        </p>
 
-    </div>
+    </header>
 
 
     <!-- =================================
-         RESPONSIVE CONTENT GRID
+         CONTENT GRID
     ================================== -->
 
     <div class="content-grid">
 
+        <!-- DNS SERVER PICKER -->
 
-        <!-- CONFIGURATION -->
+        <section class="card">
 
-        <div class="card">
+            <h2 class="card-title">DNS Server</h2>
 
-            <div class="card-title">
-                Configuration
+            <div class="server-list" id="serverList"></div>
+
+            <div class="custom-wrap" id="customWrap">
+
+                <input
+                    class="custom-input"
+                    id="customInput"
+                    type="url"
+                    inputmode="url"
+                    autocapitalize="off"
+                    autocorrect="off"
+                    spellcheck="false"
+                    placeholder="https://your-dns.example/dns-query">
+
+            </div>
+
+        </section>
+
+
+        <!-- CONFIGURATION + INSTALL -->
+
+        <section class="card">
+
+            <h2 class="card-title">Configuration</h2>
+
+            <div class="info">
+                <span class="label">Profile Name</span>
+                <span class="value">NRG DNS</span>
             </div>
 
             <div class="info">
-
-                <span class="label">
-                    Profile Name
-                </span>
-
-                <span class="value">
-                    NRG DNS
-                </span>
-
+                <span class="label">Profile File</span>
+                <span class="value">NRG-DNS.mobileconfig</span>
             </div>
 
             <div class="info">
-
-                <span class="label">
-                    Profile File
-                </span>
-
-                <span class="value">
-                    NRG.mobileconfig
-                </span>
-
+                <span class="label">Server</span>
+                <span class="value" id="infoServer">NRG DNS</span>
             </div>
 
             <div class="info">
-
-                <span class="label">
-                    Platform
-                </span>
-
-                <span class="value">
-                    iOS / iPadOS
-                </span>
-
+                <span class="label">Protocol</span>
+                <span class="value" id="infoProtocol">DNS over HTTPS</span>
             </div>
 
             <div class="info">
-
-                <span class="label">
-                    Status
-                </span>
-
-                <span class="value ready"
-                      id="status">
-
-                    Ready
-
-                </span>
-
+                <span class="label">Platform</span>
+                <span class="value">iOS / iPadOS</span>
             </div>
 
-        </div>
-
-
-        <!-- DNS INSTALL -->
-
-        <div class="card">
-
-            <div class="card-title">
-                🛡 DNS Protection
+            <div class="info">
+                <span class="label">Status</span>
+                <span class="value ready" id="status">Ready</span>
             </div>
 
-            <p class="steps">
-                Install NRG DNS configuration profile
-                on your Apple device.
-            </p>
-
-            <button
-                class="install-btn"
-                id="installBtn"
-                onclick="installDNS()">
+            <button class="install-btn"
+                    id="installBtn"
+                    onclick="installDNS()">
 
                 ↓ &nbsp; Start DNS
 
             </button>
 
-            <div class="description"
-                 id="message">
-
-                Tap Start DNS to download your configuration profile.
-
+            <div class="description" id="message">
+                Choose a server, then tap Start DNS to download
+                your configuration profile.
             </div>
 
-        </div>
+        </section>
 
 
         <!-- TELEGRAM -->
 
-        <div class="card">
+        <section class="card">
 
-            <div class="card-title">
-                Telegram Community
-            </div>
+            <h2 class="card-title">Telegram Community</h2>
 
             <p class="steps">
-
                 Join our Telegram community for updates,
                 support and announcements.
-
             </p>
 
-            <a
-                class="telegram-btn"
-                href="https://t.me/official_channel_NRG_dev"
-                target="_blank"
-                rel="noopener noreferrer">
+            <a class="telegram-btn"
+               id="telegramBtn"
+               href="https://t.me/official_channel_NRG_dev"
+               target="_blank"
+               rel="noopener noreferrer">
 
                 ✈ &nbsp; JOIN TELEGRAM
 
             </a>
 
-        </div>
+        </section>
 
 
         <!-- INSTALLATION GUIDE -->
 
-        <div class="card">
+        <section class="card">
 
-            <div class="card-title">
-                Installation Guide
-            </div>
+            <h2 class="card-title">Installation Guide</h2>
 
             <div class="steps">
 
-
                 <div class="step">
-
                     <span class="number">1</span>
-
-                    <span>
-                        Tap Start DNS to download the profile.
-                    </span>
-
+                    <span>Open this page in <b>Safari</b> on your iPhone or iPad.</span>
                 </div>
 
-
                 <div class="step">
-
                     <span class="number">2</span>
-
-                    <span>
-                        When iOS asks permission to download
-                        the configuration profile, tap Allow.
-                    </span>
-
+                    <span>Pick a DNS server and tap <b>Start DNS</b>.</span>
                 </div>
 
-
                 <div class="step">
-
                     <span class="number">3</span>
-
-                    <span>
-                        Open Settings and tap Profile Downloaded.
-                    </span>
-
+                    <span>When iOS asks permission to download the profile, tap <b>Allow</b>.</span>
                 </div>
 
-
                 <div class="step">
-
                     <span class="number">4</span>
-
-                    <span>
-                        Select the NRG DNS configuration profile.
-                    </span>
-
+                    <span>Open <b>Settings</b> and tap <b>Profile Downloaded</b>.</span>
                 </div>
 
+                <div class="step">
+                    <span class="number">5</span>
+                    <span>Select <b>NRG DNS</b>, tap <b>Install</b> and confirm.</span>
+                </div>
 
                 <div class="step">
-
-                    <span class="number">5</span>
-
-                    <span>
-                        Tap Install and follow the confirmation steps.
-                    </span>
-
+                    <span class="number">6</span>
+                    <span>Verify under <b>Settings → General → VPN &amp; Device Management</b>.</span>
                 </div>
 
             </div>
 
-        </div>
-
+        </section>
 
     </div>
 
@@ -719,17 +755,16 @@ and (max-width: 900px) {
          FOOTER
     ================================== -->
 
-    <div class="footer">
+    <footer class="footer">
 
         <b>NRG DNS</b><br>
-
         iOS DNS Configuration Installer
 
         <br><br>
 
         © 2026 NRG DNS. All Rights Reserved.
 
-    </div>
+    </footer>
 
 </div>
 
@@ -737,142 +772,431 @@ and (max-width: 900px) {
 <script>
 
 /* =====================================
-   NRG DNS CONFIGURATION
+   CONFIGURATION
 ===================================== */
 
-// GitHub RAW PROFILE URL
-
+// Official NRG profile (hosted on GitHub)
 const PROFILE_URL =
 "https://raw.githubusercontent.com/nrgengine0/NRG-DNS/refs/heads/main/NRG.mobileconfig";
-
-
-// Telegram JOIN LINK
 
 const TELEGRAM_LINK =
 "https://t.me/official_channel_NRG_dev";
 
 
 /* =====================================
-   DNS PROFILE DOWNLOAD
+   SERVER PRESETS
+===================================== */
+
+const PRESETS = [
+    {
+        id: "nrg",
+        name: "NRG DNS",
+        desc: "Official NRG configuration",
+        remote: true
+    },
+    {
+        id: "cloudflare",
+        name: "Cloudflare",
+        desc: "1.1.1.1 · Fast & private",
+        serverURL: "https://cloudflare-dns.com/dns-query"
+    },
+    {
+        id: "google",
+        name: "Google Public DNS",
+        desc: "8.8.8.8 · Reliable & global",
+        serverURL: "https://dns.google/dns-query"
+    },
+    {
+        id: "quad9",
+        name: "Quad9",
+        desc: "9.9.9.9 · Blocks malicious domains",
+        serverURL: "https://dns.quad9.net/dns-query"
+    },
+    {
+        id: "adguard",
+        name: "AdGuard DNS",
+        desc: "Ads & tracker blocking",
+        serverURL: "https://dns.adguard-dns.com/dns-query"
+    },
+    {
+        id: "custom",
+        name: "Custom DoH",
+        desc: "Use your own resolver URL",
+        custom: true
+    }
+];
+
+
+/* =====================================
+   STATE
+===================================== */
+
+let selected = PRESETS[0];
+
+const $ = (id) => document.getElementById(id);
+
+
+/* =====================================
+   RENDER SERVER LIST
+===================================== */
+
+function renderServers() {
+
+    const list = $("serverList");
+
+    list.innerHTML = PRESETS.map(p => `
+        <button type="button"
+                class="server-item ${p.id === selected.id ? "active" : ""}"
+                data-id="${p.id}">
+
+            <span class="radio"></span>
+
+            <span class="server-text">
+                <span class="server-name">${p.name}</span>
+                <span class="server-desc">${p.desc}</span>
+            </span>
+
+        </button>
+    `).join("");
+
+    list.querySelectorAll(".server-item").forEach(btn => {
+        btn.addEventListener("click", () => selectPreset(btn.dataset.id));
+    });
+}
+
+
+/* =====================================
+   SELECT PRESET
+===================================== */
+
+function selectPreset(id) {
+
+    selected = PRESETS.find(p => p.id === id) || PRESETS[0];
+
+    $("customWrap").classList.toggle("show", !!selected.custom);
+
+    $("infoServer").textContent = selected.custom
+        ? "Custom DoH"
+        : selected.name;
+
+    $("infoProtocol").textContent = "DNS over HTTPS";
+
+    setStatus("Ready", "ready");
+
+    $("message").textContent =
+        "Choose a server, then tap Start DNS to download your configuration profile.";
+
+    renderServers();
+}
+
+
+/* =====================================
+   STATUS HELPERS
+===================================== */
+
+function setStatus(text, cls) {
+
+    const el = $("status");
+
+    el.textContent = text;
+
+    el.className = "value " + (cls || "");
+}
+
+
+function setMessage(text) {
+    $("message").textContent = text;
+}
+
+
+/* =====================================
+   MOBILECONFIG BUILDER
+===================================== */
+
+function uuid() {
+
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+
+        const r = Math.random() * 16 | 0;
+        const v = c === "x" ? r : (r & 0x3 | 0x8);
+
+        return v.toString(16);
+
+    }).toUpperCase();
+}
+
+
+function escapeXML(str) {
+
+    return String(str).replace(/[<>&'"]/g, c => ({
+        "<": "&lt;",
+        ">": "&gt;",
+        "&": "&amp;",
+        "'": "&apos;",
+        "\"": "&quot;"
+    }[c]));
+}
+
+
+function buildMobileConfig(displayName, dohURL) {
+
+    const payloadUUID = uuid();
+    const rootUUID = uuid();
+
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>PayloadType</key>
+            <string>com.apple.dnsSettings.managed</string>
+            <key>PayloadIdentifier</key>
+            <string>com.nrg.dns.settings</string>
+            <key>PayloadUUID</key>
+            <string>${payloadUUID}</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>PayloadDisplayName</key>
+            <string>${escapeXML(displayName)} DNS Settings</string>
+            <key>DNSSettings</key>
+            <dict>
+                <key>DNSProtocol</key>
+                <string>HTTPS</string>
+                <key>ServerURL</key>
+                <string>${escapeXML(dohURL)}</string>
+            </dict>
+            <key>ProhibitDisablement</key>
+            <false/>
+        </dict>
+    </array>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadIdentifier</key>
+    <string>com.nrg.dns</string>
+    <key>PayloadUUID</key>
+    <string>${rootUUID}</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadDisplayName</key>
+    <string>${escapeXML(displayName)}</string>
+    <key>PayloadDescription</key>
+    <string>Secure DNS over HTTPS configuration for iOS and iPadOS.</string>
+    <key>PayloadOrganization</key>
+    <string>NRG DNS</string>
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+</dict>
+</plist>`;
+}
+
+
+/* =====================================
+   DOWNLOAD HELPER
+===================================== */
+
+function downloadBlob(filename, content) {
+
+    const blob = new Blob([content], {
+        type: "application/x-apple-aspen-config"
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.rel = "noopener";
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    // Keep the URL alive long enough for iOS to start the download
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+
+
+/* =====================================
+   iOS DETECTION
+===================================== */
+
+function isIOS() {
+
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+}
+
+
+/* =====================================
+   MAIN — INSTALL DNS
 ===================================== */
 
 function installDNS() {
 
-    const status =
-        document.getElementById("status");
+    const button = $("installBtn");
 
-    const message =
-        document.getElementById("message");
+    /* --- Platform check --- */
 
-    const button =
-        document.getElementById("installBtn");
+    if (!isIOS()) {
 
+        setStatus("iOS Required", "error");
 
-    // Detect iOS / iPadOS
-
-    const isIOS =
-        /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-        (
-            navigator.platform === "MacIntel" &&
-            navigator.maxTouchPoints > 1
+        setMessage(
+            "Please open NRG DNS in Safari on your iPhone or iPad " +
+            "to install the configuration profile."
         );
 
-
-    if (!isIOS) {
-
-        status.textContent = "iOS Required";
-
-        message.textContent =
-            "Please open NRG DNS using Safari on your iPhone or iPad.";
-
         return;
+    }
+
+
+    /* --- Resolve the target --- */
+
+    let dohURL = null;
+
+    if (selected.custom) {
+
+        const raw = $("customInput").value.trim();
+
+        if (!/^https:\/\/[^\s]+\.[^\s]+/i.test(raw)) {
+
+            setStatus("Invalid URL", "error");
+
+            setMessage(
+                "Enter a valid HTTPS resolver URL, " +
+                "for example: https://dns.example.com/dns-query"
+            );
+
+            return;
+        }
+
+        dohURL = raw;
+
+    } else if (selected.serverURL) {
+
+        dohURL = selected.serverURL;
 
     }
 
 
-    // Check configuration
-
-    if (!PROFILE_URL.endsWith(".mobileconfig")) {
-
-        status.textContent = "Invalid Profile";
-
-        message.textContent =
-            "Please check your NRG DNS profile URL.";
-
-        return;
-
-    }
-
-
-    status.textContent = "Opening Profile";
-
-    message.textContent =
-        "Waiting for iOS profile download confirmation...";
-
+    /* --- Start --- */
 
     button.disabled = true;
 
+    setStatus("Opening Profile", "ready");
 
-    // Directly open mobileconfig.
-    // Safari handles the native download permission prompt.
-
-    window.location.assign(PROFILE_URL);
+    setMessage("Waiting for the iOS profile download confirmation…");
 
 
-    // This is only a UI status, not installation confirmation.
+    try {
 
-    setTimeout(() => {
+        if (selected.remote) {
 
-        status.textContent = "Profile Requested";
+            // Official profile — hand off to Safari
+            window.location.assign(PROFILE_URL);
 
-        message.textContent =
-            "If you tapped Allow, open Settings → Profile Downloaded to install NRG DNS.";
+        } else {
+
+            // Generated profile — build and download
+            const xml = buildMobileConfig(selected.name, dohURL);
+
+            downloadBlob("NRG-DNS.mobileconfig", xml);
+        }
+
+    } catch (err) {
 
         button.disabled = false;
 
-    }, 3000);
+        setStatus("Failed", "error");
 
+        setMessage("Something went wrong. Please reload the page and try again.");
+
+        return;
+    }
+
+
+    /* --- UI feedback (not installation confirmation) --- */
+
+    setTimeout(() => {
+
+        button.disabled = false;
+
+        setStatus("Profile Requested", "ready");
+
+        setMessage(
+            "If you tapped Allow, open Settings → Profile Downloaded " +
+            "to finish installing NRG DNS."
+        );
+
+    }, 3000);
 }
 
 
 /* =====================================
-   DARK / LIGHT MODE
+   THEME
 ===================================== */
+
+function applyTheme(dark) {
+
+    document.body.classList.toggle("dark", dark);
+
+    $("themeBtn").textContent = dark ? "☀️" : "🌙";
+
+    document
+        .querySelector('meta[name="theme-color"]')
+        .setAttribute("content", dark ? "#0b0b0f" : "#f2f3f8");
+
+    try {
+        localStorage.setItem("nrg-theme", dark ? "dark" : "light");
+    } catch (e) { /* storage disabled */ }
+}
+
 
 function toggleTheme() {
 
-    document.body.classList.toggle("dark");
-
-    const dark =
-        document.body.classList.contains("dark");
+    applyTheme(!document.body.classList.contains("dark"));
+}
 
 
-    document.getElementById("themeBtn").textContent =
-        dark ? "☀️" : "🌙";
+function initTheme() {
 
+    let saved = null;
 
-    document.querySelector(
-        'meta[name="theme-color"]'
-    ).setAttribute(
-        "content",
-        dark ? "#101014" : "#f5f5fa"
-    );
+    try {
+        saved = localStorage.getItem("nrg-theme");
+    } catch (e) { /* ignore */ }
 
+    if (saved) {
+
+        applyTheme(saved === "dark");
+
+    } else {
+
+        applyTheme(
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+        );
+    }
 }
 
 
 /* =====================================
-   TELEGRAM LINK
+   INIT
 ===================================== */
 
-document.querySelector(
-    ".telegram-btn"
-).href = TELEGRAM_LINK;
+document.addEventListener("DOMContentLoaded", () => {
 
+    initTheme();
 
-/* =====================================
-   END NRG DNS
-===================================== */
+    renderServers();
+
+    selectPreset("nrg");
+
+    $("telegramBtn").href = TELEGRAM_LINK;
+
+});
 
 </script>
 
